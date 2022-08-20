@@ -64,7 +64,6 @@ userSchema.methods.comparePassword = function(plainPassword, callback) {
 	
 	//plainPassword 1234567 암호화된 비밀번호가 같은지 체크하기 위해서 plain을 암호화한다.
 	bcrypt.compare(plainPassword, this.password, function(err, isMatch) {
-		console.log(this.password)
 		if(err) return callback(err)
 			callback(null, isMatch)
 	})
@@ -72,7 +71,7 @@ userSchema.methods.comparePassword = function(plainPassword, callback) {
 }
 
 userSchema.methods.generateToken = function(callback) {
-	var user = this
+	var user = this;
 	
 	// jwt 활용해서 토큰 생성하기 userid와 문자열로 토큰을 생성한다.
 	var token = jwt.sign(user._id.toHexString(), 'secretToken')
@@ -82,6 +81,23 @@ userSchema.methods.generateToken = function(callback) {
 		callback(null, user)
 	})
 	
+}
+
+userSchema.statics.findByToken = function(token, callback) {
+	var user = this;
+	
+	//토큰을 decode 한다.
+	jwt.verify(token, 'secretToken', function(err, decoded){
+		//유저 아이디를 이용해서 유저를 찾은다음에
+		//클라이언트에서 가져온 token과 db에 보관된 토큰이 일치하는지 확인
+		
+		// 인증 된 유저만 user에 담긴다.
+		user.findOne({"_id": decoded, "token": token} , function(err, user){
+			if(err) return callback(err)
+			callback(null, user)
+		})
+		
+	})
 }
 
 
