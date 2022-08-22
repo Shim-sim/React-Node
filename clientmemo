@@ -1,0 +1,64 @@
+리덕스! == 상태 관리 라이브러리
+결국 리덕스는 이러한 state를 관리해주는 툴
+
+props란?(immutable)
+
+부모와 자식간 컴포넌트간 주고 받을 때
+props로 주고 받고 부모에서 자식으로만 이동이 가능하다.
+
+state란?(mutable)
+
+컴포넌트 안에서 데이터를 관리할 때 사용한다.
+
+
+
+Redux의 데이터 flow(unidirectional) 단방향 플로우
+
+action -> Reducer -> store
+
+
+dispatch---components---subscribe
+
+action은
+
+객체로 되어있고
+무엇이 일어났는지 설명하는 객체이다.
+
+Reducer은
+액션을 함으로써 기존의 state가 액션을 통해서 변한것을 설명하는것이 reducer
+변환 된 state를 return 함
+reducer가 안에서 하는 일이 어떻게 state들이 변하는지 보여주고 
+마지막 값은 return함
+
+store란
+메소드 등으로 관리하는 것!
+
+
+redux-thunk는?
+dispatch가 function을 받는 방법을 알려주는 middleware
+
+redux-promise는
+dispatch가 promise를 받는 방법을 알려주는 middleware
+
+
+데브리 리덕스
+
+Redux에서 중요한 컨셉 4가지
+1. store는 정보를 저장하는 공간이다.
+2. component는 store에 담긴 정보를 가져와서 사용한다.
+3. coponent에서 정보가 변경이 되면  action과 reducer을 통해서 값을 관리한다.
+4. component (dispatch) -> action -> reducer -> (update) -> [store]
+
+리덕스 다시 정리
+리액트 컴포넌트에서
+useDispatch를 통해서 action을 할 수 있다.
+action을 취한다는것은 타입을 정의 그리고 reducer로 전달해주면서 변환 된 state 값을 return 함
+
+
+auth hoc에 관한 부분 (higher order component)
+hoc는 컴포넌트임을 잊지말자 인증체크를 해주는
+
+쉽게 설명하면 다른 컴포넌트를 받아서 새로운 컴포넌트를 리턴한다. ?? -> 뭔말이지
+
+1. 우선 hoc에 모든 컴포넌트들을 넣어준다.
+2. 

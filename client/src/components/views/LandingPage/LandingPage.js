@@ -1,19 +1,19 @@
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../../_actions/user_action'
+import { useDispatch } from 'react-redux'
+import Auth from '../../../hoc/auth'
+ 
 
 function LandingPage () {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	
 	const onClickHandler = () => {
-		axios.get('https://nodeshim.run.goorm.io/api/users/logout')
+		dispatch(logoutUser())
 		.then(response => {
-			console.log(response.data)
-			if(response.data.success) {
-				navigate('/login')
-			} else {
-				alert('로그아웃 하는데 실패했습니다.')
-			}
+			console.log(response)
 		})
 	}
 	
@@ -34,4 +34,4 @@ function LandingPage () {
 	)
 }
 
-export default LandingPage
+export default Auth(LandingPage, null);
