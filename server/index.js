@@ -3,9 +3,12 @@ const app = express()
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const config = require('./config/key');
+const cors = require('cors')
+
+let cors_origin = [`https://react-node-wdqhu.run.goorm.io`];
+
 const { auth } = require('./middleware/auth');
 const { User } = require("./models/User");
-const cors = require('cors')
 
 
 //application/x-www-form-urlencoded 
@@ -14,7 +17,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //application/json 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cors())
+app.use(cors({
+	origin: cors_origin, // 허락하고자 하는 요청 주소
+	credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
+	})
+);
+
 
 const mongoose = require('mongoose')
 mongoose.connect(config.mongoURI, { useNewUrlParser: true})
@@ -104,6 +112,7 @@ app.get('/api/users/logout', auth, (req, res) => {
       })
     })
 })
+
 
 
 
