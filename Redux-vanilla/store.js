@@ -5,11 +5,13 @@ const applyMiddleware = redux.applyMiddleware;
 const logger = reduxLogger.createLogger();
 const combineReducers = redux.combineReducers; // 두개의 reducer을 넘기기 위한 라이브러리
 
-// actions
+
 // action-type
 const ADD_SUBSCRIBER = "ADD_SUBSCRIBER"  // type이 ADD_SUBSCRIBER 가진 object를 반환해주는 action 
 const ADD_VIEW = 'ADD_VIEW'
 
+
+// actions
 const addSubscriber = () => {
 	return {
 		type: ADD_SUBSCRIBER
@@ -25,10 +27,12 @@ const addViews = () => {
 
 
 
-// reducers
+initialState
 const subscriberState = {
 	subscribers: 365
 }
+
+// reducers
 const subscriberReducer = (state=subscriberState, action) => {
 	switch(action.type) {
 		case ADD_SUBSCRIBER:

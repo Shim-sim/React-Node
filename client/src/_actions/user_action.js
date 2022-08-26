@@ -5,7 +5,7 @@ import {
     AUTH_USER
 } from './types';
 
-const cookies = axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export function loginUser(dataToSubmit) {
 
